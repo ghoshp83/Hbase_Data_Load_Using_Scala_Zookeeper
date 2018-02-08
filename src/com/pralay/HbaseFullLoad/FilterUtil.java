@@ -1,7 +1,6 @@
 package com.pralay.HbaseFullLoad;
 
 import java.io.Serializable;
-
 import org.apache.log4j.Logger;
 
 public class FilterUtil implements Serializable {
@@ -10,7 +9,6 @@ public class FilterUtil implements Serializable {
 
     public static final int DataType1_OLD_COLUMN_SIZE = 4;
     public static final int DataType1_NEW_COLUMN_SIZE = 5;
-
     public static final int DataType2_OLD_COLUMN_SIZE = 2;
     public static final int DataType2_NEW_COLUMN_SIZE = 4;
 
@@ -47,10 +45,8 @@ public class FilterUtil implements Serializable {
         ++nMoImsi;
         if (str.isEmpty()) {
             ++moImsiDrop;
-            // System.out.println("mo imsi drop");
-            return false;
+             return false;
         } else {
-            // System.out.println("has mo imsi: " + str);
             return true;
         }
     }
