@@ -8,7 +8,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.SimpleFileVisitor;
 import java.nio.file.attribute.BasicFileAttributes;
-
 import org.apache.hadoop.conf.Configuration;
 import org.apache.log4j.Logger;
 
@@ -17,12 +16,10 @@ public class Environment {
     private static final Logger LOGGER = Logger.getLogger(Environment.class);
     private static final String usr=System.getProperty("user.name");
 
-    // Removes the temporary folders aftrer Spark process
     public static void collectGarbage(String appId) {
 
         Configuration hadoopConf = new Configuration();
         String localDirs = hadoopConf.get("yarn.nodemanager.local-dirs");
-
         String pathPrefix = localDirs + "/usercache/"+usr+"/appcache/";
         String folderPrefix = "blockmgr-";
 
