@@ -1,15 +1,12 @@
 package com.pralay.HbaseFullLoad;
 
-
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.HashMap;
-
 import java.util.Objects;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-
 import org.apache.hadoop.fs.FSDataInputStream;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
@@ -23,11 +20,9 @@ import org.xml.sax.SAXException;
 public class Configuration implements Serializable {
 
     private static final Logger LOGGER = Logger.getLogger(Configuration.class);
-
     private final HashMap<String, String> attr;
     private static Configuration instance = null;
     private static String configPath;
-
     public static Configuration getInstance() {
 
         if (instance == null) {
