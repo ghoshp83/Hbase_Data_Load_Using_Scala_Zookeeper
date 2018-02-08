@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+    <appender name="file" class="org.apache.log4j.RollingFileAppender">
+        <param name="File" value="${spark.yarn.app.container.log.dir}/esr-hbase-bulkloader.log"/>
+        <param name="MaxBackupIndex" value="16"/>
+        <param name="MaxFileSize" value="16MB"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d{ISO8601} - %-5p [%t:%c{1}] - %m%n"/>
+        </layout>
+    </appender>
+    <logger name="org.apache.hadoop.hive.metastore.RetryingHMSHandler">
+        <level value="FATAL"/>
+    </logger>
+    <logger name="org.apache.hadoop.hive.ql.exec.FunctionRegistry">
+        <level value="ERROR"/>
+    </logger>
+    <logger name="org.apache.parquet">
+        <level value="ERROR"/>
+    </logger>
+    <logger name="org.apache.spark.repl.SparkILoop$SparkILoopInterpreter">
+        <level value="INFO"/>
+    </logger>
+    <logger name="org.apache.spark.repl.SparkIMain$exprTyper">
+        <level value="INFO"/>
+    </logger>
+    <logger name="org.spark-project.jetty">
+        <level value="WARN"/>
+    </logger>
+    <logger name="org.spark-project.jetty.util.component.AbstractLifeCycle">
+        <level value="ERROR"/>
+    </logger>
+    <logger name="parquet">
+        <level value="ERROR"/>
+    </logger>
+    <root>
+        <level value="INFO"/>
+        <appender-ref ref="file"/>
+    </root>
+</log4j:configuration>
