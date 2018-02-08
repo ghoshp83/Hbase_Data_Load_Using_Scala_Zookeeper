@@ -12,7 +12,6 @@ import org.apache.hadoop.hbase.HBaseConfiguration;
 import org.apache.hadoop.hbase.security.token.TokenUtil;
 import org.apache.hadoop.security.Credentials;
 import org.apache.hadoop.security.UserGroupInformation;
-
 import java.io.IOException;
 import java.security.PrivilegedExceptionAction;
 import java.util.ArrayList;
@@ -25,35 +24,23 @@ public class Executor implements ZookeeperManagerSingleton.DataMonitorListener {
 
     public static int ZOOKEPER_RETRY = 2;
     public static int EXECUTOR_RETRY = 10;
-
     private static final Logger LOGGER = Logger.getLogger(Executor.class);
     private static Executor instance;
-
     private String executionMode;
-
     private String resolveLocation;
-
     private static SparkConf sparkConf = null;
     private static SparkContext sc = null;
     private static UserGroupInformation ugi = null;
-
     private static FilterUtil filter;
-
     private String partitions;
     private String hbaseOutputTable;
     private String hbaseIcidResolveTable;
-
     private String znodeReadyFolder;
     private String znodeProcessedFolder;
-
     private String hdfsTempFolder;
-
     private Integer locDataUpdateFreq;
-
     private long lastLocUpdateTime;
-
     private List<Integer> ProcessTimeArray = new ArrayList<Integer>();
-
     private int avgOfLastN = 12;
     private int numberOfBucketsToProcessInOneIteration = 1;
 
@@ -70,7 +57,6 @@ public class Executor implements ZookeeperManagerSingleton.DataMonitorListener {
             try {
                 sparkConf = executorConfigurator.getSparkConf("HBaseFullLoad");
                 LOGGER.info("before creating spark context, spark Conf:" + sparkConf);
-                // UserGroupInformation.setConfiguration(SparkHadoopUtil.get().newConfiguration(sparkConf));
                 if (UserGroupInformation.isSecurityEnabled()) {
                     Credentials credentials = UserGroupInformation.getLoginUser().getCredentials();
                     SparkHadoopUtil.get().addCurrentUserCredentials(credentials);
@@ -85,23 +71,16 @@ public class Executor implements ZookeeperManagerSingleton.DataMonitorListener {
 
         this.executionMode = config.getValue("executionMode");
         this.numberOfBucketsToProcessInOneIteration = Integer.parseInt(config.getValue("numberOfBucketsToProcessInOneIteration", "1"));
-
-        //this.resolveLocation = config.getValue("resolveLocation");
-
         this.partitions = config.getValue("partitions");
         this.hbaseOutputTable = config.getValue("outputTable");
         this.hbaseIcidResolveTable = config.getValue("icidResolveTable");
-
         this.znodeReadyFolder = config.getValue("zkReadyFolder");
         this.znodeProcessedFolder = config.getValue("zkProcessedFolder");
-
         this.hdfsTempFolder = config.getValue("hdfsTempFolder");
 
         if (this.executionMode.equals("datatype1")) {
             // Frequency of location update in hours
             this.locDataUpdateFreq = Integer.parseInt(config.getValue("locDataUpdateFreq"));
-            //this.lr = executorConfigurator.getLocationResolver();
-
         }
 
         this.filter = filter;
@@ -110,8 +89,6 @@ public class Executor implements ZookeeperManagerSingleton.DataMonitorListener {
         this.lastLocUpdateTime = System.currentTimeMillis() / 1000L;
         LOGGER.info("MONITOR: last update of cell location data: " + lastLocUpdateTime);
 
-        // Zabbix event monitoring
-        // LOGGER.info("MONITOR: ApplicationID: " + String.valueOf(sc.applicationId()));
         ZookeeperManagerSingleton.getInstance().writeMonitoringParam("ApplicationID", String.valueOf(sc.applicationId()));
     }
 
@@ -221,7 +198,6 @@ public class Executor implements ZookeeperManagerSingleton.DataMonitorListener {
             // In case of cell location data is outdated, refresh it
             if ((currentTime - lastLocUpdateTime) > (locDataUpdateFreq * 60 * 60)) {
                 // Update cell location data
-                //lr.setConfiguration(config);
                 LOGGER.info("Cell location data updated successfully.");
 
                 // Update last refresh date
@@ -330,7 +306,7 @@ public class Executor implements ZookeeperManagerSingleton.DataMonitorListener {
         ZookeeperManagerSingleton.getInstance().writeMonitoringParam("ZnodesInProcessed", String.valueOf(stat.getNumChildren()));
 
         if( bucketSuccess ) {
-            LOGGER.info("EDCR BulkLoad filtered split drop: " + filter.getSplitDrop().toString());
+            LOGGER.info("DataType 2 BulkLoad filtered split drop: " + filter.getSplitDrop().toString());
 
             ZookeeperManagerSingleton.getInstance().writeMonitoringParam("lastProcessedPath", folder);
 
