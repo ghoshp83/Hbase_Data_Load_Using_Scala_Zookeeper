@@ -1,12 +1,10 @@
 package com.pralay.HbaseFullLoad;
 
 import static org.apache.hadoop.hbase.util.Bytes.toBytes;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
 import org.apache.log4j.Logger;
 import org.apache.zookeeper.AsyncCallback;
 import org.apache.zookeeper.CreateMode;
@@ -17,7 +15,6 @@ import org.apache.zookeeper.ZooDefs;
 import org.apache.zookeeper.ZooKeeper;
 import org.apache.zookeeper.data.ACL;
 import org.apache.zookeeper.data.Stat;
-
 import com.pralay.core.ExecutionContext;
 import com.pralay.core.configuration.ServerAddr;
 
