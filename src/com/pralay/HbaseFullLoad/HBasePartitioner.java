@@ -4,7 +4,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
-
 import org.apache.hadoop.hbase.HRegionInfo;
 import org.apache.hadoop.hbase.util.Bytes;
 import org.apache.log4j.Logger;
