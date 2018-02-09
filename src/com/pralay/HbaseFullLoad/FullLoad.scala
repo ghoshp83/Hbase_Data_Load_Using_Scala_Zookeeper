@@ -1,10 +1,8 @@
 package com.pralay.HbaseFullLoad
 
-
 import java.io.IOException
 import java.security.PrivilegedExceptionAction
 import java.util.UUID
-
 import org.apache.hadoop.fs.{FileSystem, Path}
 import org.apache.hadoop.hbase.client.{HBaseAdmin, HTable}
 import org.apache.hadoop.hbase.io.ImmutableBytesWritable
@@ -23,7 +21,6 @@ object FullLoad extends Serializable {
 
   def loadData (sc: SparkContext, filterutil: FilterUtil, params: Array[String] ): Unit = {
     val configuration= com.pralay.HbaseFullLoad.Configuration.getInstance()
-
     val keyTab = configuration.getValue("KEY_TAB_FILE", "/etc/test.keytab")
     val testUser = configuration.getValue("TEST_USER", "test")
     val hbase_hdfs_site_xml = configuration.getValue("HBASE_HDFS_SITE_XML", "/etc/hbase/conf/hbase-hdfs-site.xml")
@@ -35,12 +32,9 @@ object FullLoad extends Serializable {
       conf1.addResource(new Path(hbase_hdfs_site_xml))
 
       val hbaseConf = HBaseConfiguration.create(conf1)
-       logger.info("alter the hbaseConf:" + hbaseConf)
+      logger.info("alter the hbaseConf:" + hbaseConf)
       UserGroupInformation.setConfiguration(hbaseConf);
-      // val ugi = UserGroupInformation.getLoginUser();
       val ugi: UserGroupInformation = UserGroupInformation.loginUserFromKeytabAndReturnUGI(testUser, keyTab)
-      // UserGroupInformation.loginUserFromKeytab("eea", keyTab)
-      // val ugi: UserGroupInformation = UserGroupInformation.createRemoteUser("eea", AuthMethod.KERBEROS);
       ugi.setAuthenticationMethod(AuthMethod.KERBEROS);
       UserGroupInformation.setLoginUser(ugi)
       UserGroupInformation.setConfiguration(hbaseConf)
@@ -72,8 +66,6 @@ object FullLoad extends Serializable {
     val numPartitions = params(1).toInt // Number of final partitions
     val hbaseTable = params(2) // Name of Hbase table to load data
     val hdfsTempFolder = params(3)
-    //val resolveLocation = params(4)
-
     var startTime = System.currentTimeMillis()
     val start = startTime
     logger.info("DataType1 BulkLoad process started for " + paths + " folders.")
@@ -81,7 +73,6 @@ object FullLoad extends Serializable {
     // Configure HBase connection
     val tableName = hbaseTable
     val HTable = new HTable(hbaseConf, tableName)
-
     hbaseConf.set(TableOutputFormat.OUTPUT_TABLE, tableName)
     val job = Job.getInstance(hbaseConf)
     job.setMapOutputKeyClass(classOf[ImmutableBytesWritable])
@@ -107,9 +98,6 @@ object FullLoad extends Serializable {
     finishTime = System.currentTimeMillis()
     logger.info("HDFS content read, took " + (finishTime - startTime).toString + " ms.")
     startTime = finishTime
-
-    
-    
     
       // Mapping
       val mappedContent = file
@@ -140,8 +128,6 @@ object FullLoad extends Serializable {
 
       logger.info("DataType1 HFile output path on hdfs: " + esrMapHfilePath)
       try {
-
-
         // Save Hfiles on HDFS
         esrMap.saveAsNewAPIHadoopFile(
           esrMapHfilePath,
