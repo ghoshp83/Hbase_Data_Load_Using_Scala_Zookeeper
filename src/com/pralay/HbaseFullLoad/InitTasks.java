@@ -1,14 +1,12 @@
 package com.pralay.HbaseFullLoad;
 
 import static org.apache.hadoop.hbase.util.Bytes.toBytes;
-
 import java.io.IOException;
 import java.security.PrivilegedExceptionAction;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
-
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
