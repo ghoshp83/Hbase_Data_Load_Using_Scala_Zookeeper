@@ -2,7 +2,6 @@ package com.pralay.HbaseFullLoad;
 
 import com.google.gson.JsonElement;
 import org.apache.log4j.Logger;
-
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
