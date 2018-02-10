@@ -34,4 +34,16 @@
     
     d) Exeception handling during connection loss with zookeeper
     
-    e) 
+    e) There are there znodes where data management will be done :
+    
+       1. /test/datatype1/ready : Zookeeper path of znodes for data bulks created by upstream systems.
+       
+       2. /test/datatype1/processor : Zookeeper path of znodes for data BulkLoaded into HBase.
+       
+       3. /test/Monitoring/HBaseFullLoad : Zookeeper path of znodes for data BulkLoaded into HBase.
+       
+    f) Create, Modify and Delete znodes according to data processing flow. At first, data will be present in "ready" znode and then it 
+       will move to "processor" and eventually to "HBaseFullLoad" znode.
+       
+14. Hbase management will be taken care by "com.pralay.HbaseFullLoad.InitTasks". It will ->
+    
