@@ -27,6 +27,11 @@
 13. All the zookeeper operations will be handled by "com.pralay.HbaseFullLoad.ZookeeperManagerSingleton". This class will be responsible
     for below activities ->
     a) create a singleton zookeeper instance.
+    
     b) Initialize zookeeper session.
     
-    c) test
+    c) Monitoring of znodes. When a new znode is getting created then a trigger will be initiated to process the data and load in Hbase.
+    
+    d) Exeception handling during connection loss with zookeeper
+    
+    e) 
