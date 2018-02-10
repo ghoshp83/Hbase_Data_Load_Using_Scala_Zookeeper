@@ -5,4 +5,11 @@
 3. In every five minutes, new data are getting loaded in HDFS and a reference is getting stored in zookeeper. 
 4. This application is following zookeeper's data nodes. Zookeeper's data nodes contain information about which time-bucket of data is
    ready to be processed.
-5. 
+5. Data is stored in a epoch timestamp bucket. For example ->
+   ```
+   hadoop fs -ls /test/datatype1
+   /test/datatype1/1517805000
+   /test/datatype1/1517805300
+   /test/datatype1/1517805600
+   
+   ```
