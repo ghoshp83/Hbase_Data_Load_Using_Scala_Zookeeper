@@ -73,7 +73,6 @@ public class Executor implements ZookeeperManagerSingleton.DataMonitorListener {
         this.numberOfBucketsToProcessInOneIteration = Integer.parseInt(config.getValue("numberOfBucketsToProcessInOneIteration", "1"));
         this.partitions = config.getValue("partitions");
         this.hbaseOutputTable = config.getValue("outputTable");
-        this.hbaseIcidResolveTable = config.getValue("icidResolveTable");
         this.znodeReadyFolder = config.getValue("zkReadyFolder");
         this.znodeProcessedFolder = config.getValue("zkProcessedFolder");
         this.hdfsTempFolder = config.getValue("hdfsTempFolder");
