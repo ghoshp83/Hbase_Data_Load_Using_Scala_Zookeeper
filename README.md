@@ -57,7 +57,10 @@
     4. Create Hbase table, if didn't exist. 
     
     5. Perform all database transaction through phoenix.
+    
+15. Hbase tables has been partitioned through "com.pralay.HbaseFullLoad.HBasePartitioner" class to get better performance.
 
-15. Data will be loaded into Hbase through a scala class "com.pralay.HbaseFullLoad.FullLoad".
+16. Data will be loaded into Hbase through a scala class "com.pralay.HbaseFullLoad.FullLoad".
 
-16. Kerberos authentication has been enabled through this application. All hbase connection will be kerberos authenticated. 
+17. Kerberos authentication has been enabled into this application. All hbase connection will be authenticated through "test.keytab"
+    file. "test" will be the authenticated user to carry out business processing in secure manner. 
