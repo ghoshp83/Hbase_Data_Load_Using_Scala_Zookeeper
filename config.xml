@@ -1,0 +1,126 @@
+<FullLoad>
+    <!-- BULKLOADER BASE CONFIG -->
+    <property>
+        <name>executionMode</name>
+        <value>datatype1</value>
+        <description>Sets the working mode for datatype1 or datatype2 Full Load. Possible values: datatype1/datatype2</description>
+    </property>
+    <property>
+        <name>partitions</name>
+        <value>5</value>
+        <description>Number of RDD partitions, created by Spark Scala code. Higher number of partition means faster processing time and more compaction in HBase.</description>
+    </property>
+    <property>
+        <name>numberOfBucketsToProcessInOneIteration</name>
+        <value>5</value>
+        <description>number of buckets to process in one iteration (one full loading)</description>
+    </property>
+    <property>
+        <name>resolveLocation</name>
+        <value>false</value>
+        <description>Sets whether the cell location should be resolved. Possible values: true/false</description>
+    </property>
+    <property>
+        <name>locDataUpdateFreq</name>
+        <value>24</value>
+        <description>Defines the update frequency of cell location data in hours. If resolveLocation set to false, this parameter is not used.</description>
+    </property>
+    <!-- END OF BULKLOADER BASE CONFIG -->
+
+    <!-- HBASE CONFIG -->
+    <property>
+        <name>outputTable</name>
+        <value>datatypeone</value>
+        <description>Name of HBase table for main data.</description>
+    </property>
+    <property>
+        <name>hbaseNumberOfRegions</name>
+        <value>100</value>
+        <description>Number of regions to create table with. Usable with keys with numeric prefix only.</description>
+    </property>
+    <property>
+        <name>hbaseTableCompression</name>
+        <value>GZ</value>
+        <description>Compression algorithm for HBase table.</description>
+    </property>
+    <property>
+        <name>cfTTL</name>
+        <value>2592000</value> <!-- Set to 1 month. -->
+        <description>TTL value for HBase tables is sec.</description>
+    </property>
+    <property>
+        <name>phoenixJDBCConnString</name>
+        <value>jdbc:phoenix:hbase1.zookeeper.test,hbase2.zookeeper.test,hbase3.zookeeper.test:2181</value>
+        <description>jdbc connection string for apache phoenix</description>
+    </property>
+    <!-- END OF HBASE CONFIG -->
+
+    <!-- HDFS CONFIG -->
+    <property>
+        <name>hdfsTempFolder</name>
+        <value>/test/hbase/.fullload_staging_root/hfiletemp/</value>
+        <description>Hdfs folder for temporary HFiles created by Spark code. Important: The directory has to be on the HDFS volume, which is used by Hbase; and the subdirectory name under Hbase root has to start with '.'.</description>
+    </property>
+    <!-- END OF HDFS CONFIG -->
+
+    <!-- ZOOKEEPER CONFIG -->
+    <property>
+        <name>zkHost</name>
+        <value>zookeeper.test</value>
+        <description>Zookeeper Host IP</description>
+    </property>
+    <property>
+        <name>zkPort</name>
+        <value>2181</value>
+        <description>Zookeeper port</description>
+    </property>
+    <property>
+        <name>zkReadyFolder</name>
+        <value>/test/datatype1/ready</value>
+        <description>Zookeeper path of znodes for data bulks created by upstream systems.</description>
+    </property>
+    <property>
+        <name>zkProcessedFolder</name>
+        <value>/test/datatype1/processor</value>
+        <description>Zookeeper path of znodes for data BulkLoaded into HBase.</description>
+    </property>
+    <property>
+        <name>zkMonitoringFolder</name>
+        <value>/test/Monitoring/HBaseFullLoad</value>
+        <description>Zookeeper path of znodes for data BulkLoaded into HBase.</description>
+    </property>
+    <!-- END OF ZOOKEEPER CONFIG -->
+
+    <!-- DATABASE CONFIG -->
+    <property>
+        <name>pgConnString</name>
+        <value>jdbc:postgresql://test.greenplum.db:5555/network</value>
+        <description>Connection string for database server of cell location.</description>
+    </property>
+    <property>
+        <name>dbUser</name>
+        <value>testUser</value>
+        <description>User for reaching cell location table.</description>
+    </property>
+    <property>
+        <name>dbPass</name>
+        <value>testing</value>
+        <description>Password for reaching cell location table.</description>
+    </property>
+    <property>
+        <name>dbLocationTable</name>
+        <value>test_location</value>
+        <description>Name of table for resolving cell location.</description>
+    </property>
+    <property>
+        <name>dbType</name>
+        <value>oracle</value>
+        <description>Database type</description>
+    </property>
+    <property>
+        <name>oracleConnString</name>
+        <value>jdbc:oracle:thin:@//test.greenplum.db:1521/testdb1</value>
+        <description>Connection string for database server of test location.</description>
+    </property>
+    <!-- END OF DATABASE CONFIG -->
+</FullLoad>
