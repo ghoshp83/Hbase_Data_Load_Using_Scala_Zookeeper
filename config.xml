@@ -25,13 +25,6 @@
         <value>24</value>
         <description>Defines the update frequency of cell location data in hours. If resolveLocation set to false, this parameter is not used.</description>
     </property>
-   <!-- Use log4j.xml
-    <property>
-        <name>logLevel</name>
-        <value>debug</value>
-        <description>Level of application log only to override log4j setting.</description>
-    </property>
-    -->
     <!-- END OF BULKLOADER BASE CONFIG -->
 
     <!-- HBASE CONFIG -->
@@ -57,28 +50,9 @@
     </property>
     <property>
         <name>phoenixJDBCConnString</name>
-        <value>jdbc:phoenix:hbase1.zookeeper.eea,hbase2.zookeeper.eea,hbase3.zookeeper.eea:2181</value>
+        <value>jdbc:phoenix:hbase1.zookeeper.test,hbase2.zookeeper.test,hbase3.zookeeper.test:2181</value>
         <description>jdbc connection string for apache phoenix</description>
     </property>
-
-    <!-- The following two parameters are used to define the hbase name node details.Uncomment to change default values -->
-    <!--property>
-        <name>HBASE_HDFS_SITE_XML</name>
-        <value>/etc/hbase/conf/hbase-hdfs-site.xml</value>
-        <description>hdfs-site xml file of hbase cluster</description>
-     </property-->
-
-    <!--property>
-        <name>HBASE_CORE_SITE_XML</name>
-        <value>/etc/hbase/conf/hbase-core-site.xml</value>
-        <description>core-site xml file of hbase cluster</description>
-    </property-->
-
-    <!--property>
-        <name>sqlCreateViewQuery</name>
-        <value>create view if not exists "esr" ("userid_ts" varchar primary key, "data"."payload" varchar, "data"."location_history" varchar) immutable_rows=true</value>
-        <description>sql query to create view in phoenix.</description>
-    </property-->
     <!-- END OF HBASE CONFIG -->
 
     <!-- HDFS CONFIG -->
@@ -92,7 +66,7 @@
     <!-- ZOOKEEPER CONFIG -->
     <property>
         <name>zkHost</name>
-        <value>zookeeper.eea</value>
+        <value>zookeeper.test</value>
         <description>Zookeeper Host IP</description>
     </property>
     <property>
@@ -112,7 +86,7 @@
     </property>
     <property>
         <name>zkMonitoringFolder</name>
-        <value>/test/Monitoring/HBaseBulkLoader</value>
+        <value>/test/Monitoring/HBaseFullLoad</value>
         <description>Zookeeper path of znodes for data BulkLoaded into HBase.</description>
     </property>
     <!-- END OF ZOOKEEPER CONFIG -->
@@ -145,7 +119,7 @@
     </property>
     <property>
         <name>oracleConnString</name>
-        <value>jdbc:oracle:thin:@//test.greenplum.db:1521/eeapdb1</value>
+        <value>jdbc:oracle:thin:@//test.greenplum.db:1521/testdb1</value>
         <description>Connection string for database server of test location.</description>
     </property>
     <!-- END OF DATABASE CONFIG -->
