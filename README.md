@@ -26,6 +26,7 @@
 12. Main class of this application is "com.pralay.HbaseFullLoad.Executor"
 13. All the zookeeper operations will be handled by "com.pralay.HbaseFullLoad.ZookeeperManagerSingleton". This class will be responsible
     for below activities ->
+    
     a) create a singleton zookeeper instance.
     
     b) Initialize zookeeper session.
@@ -47,3 +48,16 @@
        
 14. Hbase management will be taken care by "com.pralay.HbaseFullLoad.InitTasks". It will ->
     
+    1. Create Hbase connection through apache phoenix.  
+    
+    2. Create Hdfs location for Hbase table(s). 
+    
+    3. Setup the compression algorithm, TTL and required number of region server. It will be sourced from config.xml file.
+    
+    4. Create Hbase table, if didn't exist. 
+    
+    5. Perform all database transaction through phoenix.
+
+15. Data will be loaded into Hbase through a scala class "com.pralay.HbaseFullLoad.FullLoad".
+
+16. Kerberos authentication has been enabled through this application. All hbase connection will be kerberos authenticated. 
