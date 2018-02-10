@@ -77,7 +77,7 @@
     <property>
         <name>zkReadyFolder</name>
         <value>/test/datatype1/ready</value>
-        <description>Zookeeper path of znodes for data bulks created by InputAdapter.</description>
+        <description>Zookeeper path of znodes for data bulks created by upstream systems.</description>
     </property>
     <property>
         <name>zkProcessedFolder</name>
