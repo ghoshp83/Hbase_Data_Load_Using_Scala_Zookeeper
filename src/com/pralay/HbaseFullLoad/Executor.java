@@ -305,7 +305,7 @@ public class Executor implements ZookeeperManagerSingleton.DataMonitorListener {
         ZookeeperManagerSingleton.getInstance().writeMonitoringParam("ZnodesInProcessed", String.valueOf(stat.getNumChildren()));
 
         if( bucketSuccess ) {
-            LOGGER.info("DataType 2 BulkLoad filtered split drop: " + filter.getSplitDrop().toString());
+            LOGGER.info("DataType2 BulkLoad filtered split drop: " + filter.getSplitDrop().toString());
 
             ZookeeperManagerSingleton.getInstance().writeMonitoringParam("lastProcessedPath", folder);
 
