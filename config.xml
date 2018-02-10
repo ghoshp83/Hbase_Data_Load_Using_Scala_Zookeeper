@@ -30,7 +30,7 @@
     <!-- HBASE CONFIG -->
     <property>
         <name>outputTable</name>
-        <value>esr</value>
+        <value>datatypeone</value>
         <description>Name of HBase table for main data.</description>
     </property>
     <property>
@@ -76,7 +76,7 @@
     </property>
     <property>
         <name>zkReadyFolder</name>
-        <value>/test/datatype1</value>
+        <value>/test/datatype1/ready</value>
         <description>Zookeeper path of znodes for data bulks created by InputAdapter.</description>
     </property>
     <property>
