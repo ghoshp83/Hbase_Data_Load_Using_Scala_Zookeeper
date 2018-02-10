@@ -20,5 +20,13 @@
 8. config.xml contains application configuration details, Hbase configuration details, HDFS configuration details, zookeeper configuration
    details and optional other database(greenplum and oracle) details.
 9. log4j.xml contains application log mechanism details.
-10. All dependent jar files are present in this repository in "dependencies" folder.
-11. One can build the application from the source code 
+10. All dependent jar files are present in this repository inside "dependencies" folder.
+11. One can create executable(runnable jar file) from application source code using maven or gradle with source code present in this
+    repository inside "src" folder along with "dependencies".
+12. Main class of this application is "com.pralay.HbaseFullLoad.Executor"
+13. All the zookeeper operations will be handled by "com.pralay.HbaseFullLoad.ZookeeperManagerSingleton". This class will be responsible
+    for below activities ->
+    a) create a singleton zookeeper instance.
+    b) Initialize zookeeper session.
+    
+    c) test
